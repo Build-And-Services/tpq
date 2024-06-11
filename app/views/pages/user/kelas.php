@@ -19,7 +19,9 @@ ob_start();
                         <th class="py-2 text-left px-4">Kategori Kelas</th>
                         <th class="py-2 text-left px-4">Jadwal</th>
                         <th class="py-2 text-left px-4">Jam</th>
-                        <th class="py-2 text-left px-4">Aksi</th>
+                        <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+                            <th class="py-2 text-left px-4">Aksi</th>
+                        <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,19 +32,21 @@ ob_start();
                             <td class="py-2 text-left px-4"><?php echo date('H:i', strtotime($item->mulai)); ?> -
                                 <?php echo date('H:i', strtotime($item->selesai)); ?>
                             </td>
-                            <td class="py-2 text-left px-4 flex gap-2">
-                                <button class="edit-class-button px-1 bg-gray-100 border-gray-400 border"
-                                    data-id="<?php echo $item->id_kelas; ?>"
-                                    data-id_kategori="<?php echo $item->id_kategori; ?>"
-                                    data-link_meet="<?php echo $item->link_meet; ?>"
-                                    data-jadwal="<?php echo $item->jadwal; ?>" data-mulai="<?php echo $item->mulai; ?>"
-                                    data-mulai="<?php echo $item->mulai; ?>">
-                                    Edit
-                                </button>
-                                <a href="/kelas/delete/<?= $item->id_kelas; ?>"
-                                    class="px-1 bg-gray-100 border-gray-400 border"
-                                    onclick="return confirm('Apakah kamu yakin akan menghapus data tersebut?')">Hapus</a>
-                            </td>
+                            <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+                                <td class="py-2 text-left px-4 flex gap-2">
+                                    <button class="edit-class-button px-1 bg-gray-100 border-gray-400 border"
+                                        data-id="<?php echo $item->id_kelas; ?>"
+                                        data-id_kategori="<?php echo $item->id_kategori; ?>"
+                                        data-link_meet="<?php echo $item->link_meet; ?>"
+                                        data-jadwal="<?php echo $item->jadwal; ?>" data-mulai="<?php echo $item->mulai; ?>"
+                                        data-mulai="<?php echo $item->mulai; ?>">
+                                        Edit
+                                    </button>
+                                    <a href="/kelas/delete/<?= $item->id_kelas; ?>"
+                                        class="px-1 bg-gray-100 border-gray-400 border"
+                                        onclick="return confirm('Apakah kamu yakin akan menghapus data tersebut?')">Hapus</a>
+                                </td>
+                            <?php endif; ?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -129,7 +133,6 @@ ob_start();
                 document.getElementById("edit_mulai").value = mulai;
                 document.getElementById("edit_selesai").value = selesai;
 
-                // Set the selected option in the dropdown
                 var select = document.getElementById("edit_kategori");
                 for (var i = 0; i < select.options.length; i++) {
                     if (select.options[i].value == id_kategori) {
