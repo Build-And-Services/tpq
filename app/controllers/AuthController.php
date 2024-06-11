@@ -117,7 +117,7 @@ class AuthController extends Controller
         }
     }
 
-    public function loginSantri()
+    public function login()
     {
         $email = $_POST['email'];
         $password = $_POST['password'];
