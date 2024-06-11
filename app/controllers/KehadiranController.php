@@ -52,10 +52,10 @@ class KehadiranController extends Controller
             }
     
             $_SESSION['success'] = 'Sukses menambahkan kehadiran';
-            header('Location: /pages/user/presensi');
+            header('Location: /kehadiran');
         } catch (\Throwable $th) {
             $_SESSION['error'] = $th->getMessage();
-            header('Location: /pages/user/presensi/create');
+            header('Location: /kehadiran/create');
         }
     }
 
