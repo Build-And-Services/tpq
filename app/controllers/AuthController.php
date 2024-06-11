@@ -4,6 +4,7 @@ namespace app\controllers;
 
 require_once '../core/Autoloader.php';
 
+use app\models\Asatidz;
 use app\models\Santri;
 use PDOException;
 use app\models\User;
@@ -59,8 +60,55 @@ class AuthController extends Controller
     }
 
     public function registerAsatidz(){
-        var_dump($this->request->all());
-        die;
+        try {
+            $user = new User();
+            $hashed_password = password_hash($this->request->password, PASSWORD_BCRYPT);
+            $id_user = $user->insertGetId([
+                'name' => $this->request->nama_asatidz,
+                'email' => $this->request->email,
+                'password' => $hashed_password,
+                'role' => 'asatidz',
+                'status' => 'WAITING'
+            ]);
+
+            if ($_FILES['ketersedia_mengajar']) {
+                $targetDir = $_SERVER['DOCUMENT_ROOT'] . "/images/ketersedia_mengajar/"; // Direktori tujuan penyimpanan
+                $targetFile = $targetDir . basename($_FILES["ketersedia_mengajar"]["name"]);
+                $upload = move_uploaded_file($_FILES["ketersedia_mengajar"]["tmp_name"], $targetFile);
+                if ($upload) {
+                    $_POST["ketersedia_mengajar"]  = "/images/ketersedia_mengajar/" . basename($_FILES["ketersedia_mengajar"]["name"]);
+                }
+            }
+
+            if ($_FILES['syahadah_tilawati']) {
+                $targetDir = $_SERVER['DOCUMENT_ROOT'] . "/images/syahadah_tilawati/"; // Direktori tujuan penyimpanan
+                $targetFile = $targetDir . basename($_FILES["syahadah_tilawati"]["name"]);
+                $upload = move_uploaded_file($_FILES["syahadah_tilawati"]["tmp_name"], $targetFile);
+                if ($upload) {
+                    $_POST["syahadah_tilawati"]  = "/images/syahadah_tilawati/" . basename($_FILES["syahadah_tilawati"]["name"]);
+                }
+            }
+
+            $asatidz = new Asatidz();
+            $asatidz->create([
+                'id_user' => $id_user,
+                'tgl_lahir' => $this->request->tgl_lahir,
+                'jenis_kelamin' => $this->request->jenis_kelamin,
+                'alamat' => $this->request->alamat,
+                'id_kabupaten' => 1,
+                'id_asal_instansi' => $this->request->id_asal_instansi,
+                'id_kategori' => $this->request->id_kategori,
+                'no_telepon' => $this->request->no_telepon,
+                'bukti_ketersedian_mengajar' => $_POST["ketersedia_mengajar"],
+                'bukti_syahadah' => $_POST["syahadah_tilawati"],
+            ]);
+            header('Location: /loginasatidz');
+        } catch (\Throwable $th) {
+            header('Location: /register-asatidz');
+        
+        }
+      
+
     }
 
     public function registerSantri()

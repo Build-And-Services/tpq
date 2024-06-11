@@ -116,7 +116,7 @@
                     <option value="Perempuan">Perempuan</option>
                 </select>
                 <input type="text" name="alamat" placeholder="Alamat Lengkap" required>
-                <select name="instansi" name="jenis_kelamin" required>
+                <select name="instansi" required>
                     <option value="" disabled selected>Pilih Jenis Instansi</option>
                     <option value="Universitas Jember">Universitas Jember</option>
                     <option value="Politeknik Jember">Politeknik Jember</option>
