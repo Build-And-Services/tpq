@@ -15,23 +15,36 @@ ob_start();
             </p>
              <p>
                 <span class="font-semibold mr-5">Jenis Kelamin</span>
-                <?= $profile->jenis_kelamin ?>
+                <?php if(isset($profile->jenis_kelamin)): ?>
+                    <?= $profile->jenis_kelamin ?>
+                <?php endif; ?>
 
             </p>
              <p>
                 <span class="font-semibold mr-5">Tanggal Lahir</span>
-                <?= $profile->tgl_lahir ?>
+          
+                   <?php if(isset($profile->tgl_lahir)): ?>
+                    <?= $profile->tgl_lahir ?>
+                <?php endif; ?>
 
             </p>
 
              <p>
                 <span class="font-semibold mr-5">Alamat Lengkap</span>
-                <?= $profile->alamat ?>
+          
+                   <?php if(isset($profile->alamat)): ?>
+                    <?= $profile->alamat ?>
+                <?php endif; ?>
+              
 
             </p>
              <p>
                 <span class="font-semibold mr-5">Kategori</span>
-                <?= $profile->kategori ?>
+           
+          
+                   <?php if(isset($profile->kategori)): ?>
+                    <?= $profile->kategori ?>
+                <?php endif; ?>
 
             </p>
 

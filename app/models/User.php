@@ -18,7 +18,22 @@ class User extends Model
     }
 
     public function getProfile($id_user, $role) {
+        if($role == 'admin'){
         $sql = "
+            SELECT 
+                u.id_user,
+                u.name,
+                u.email,
+                u.role
+            FROM 
+                users u
+           
+      
+            WHERE 
+                u.id_user = :id_user
+        ";
+        }else{
+                    $sql = "
             SELECT 
                 u.id_user,
                 u.name,
@@ -36,6 +51,8 @@ class User extends Model
             WHERE 
                 u.id_user = :id_user
         ";
+        }
+
         // var_dump($sql);
         $prepare = $this->pdo->prepare($sql);
         $prepare->bindValue(':id_user', $id_user, PDO::PARAM_INT);
@@ -62,7 +79,7 @@ class User extends Model
                 WHERE 
                     u.role = '".$role."'
             ";
-        }else{
+        }else if($role == 'santri'){
             $sql = "
                 SELECT 
                     u.id_user,
