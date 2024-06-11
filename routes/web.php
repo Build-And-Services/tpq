@@ -30,3 +30,6 @@ Router::get('/penilaian/create', 'PenilaianController', 'add');
 Router::post('/penilaian/store', 'PenilaianController', 'store');
 Router::get('/profile', 'ProfilAsatidzController', 'index');
 
+Router::get('/kelas', 'KelasController', 'index');
+Router::get('/kelas/delete/{id}', 'KelasController', 'destroy');
+Router::post('/kelas/update', 'KelasController', 'update');
