@@ -11,18 +11,19 @@ class ProfilAsatidzController extends Controller
 {
     public function __construct()
     {
-        if (!$this->isAuthenticated()) {
-            header('Location: /');
-            exit();
-        }
+        // if (!$this->isAuthenticated()) {
+        //     header('Location: /');
+        //     exit();
+        // }
     }
 
     public function index($id_user)
     {
         $user = new User();
-        $profile = $user->getProfileAsatidz($id_user);
-        $this->view('pages/user/profileAsatidz', [
-            'profile' => $profile
+        $profile = $user->getProfile(7, 'asatidz');
+        return $this->view('pages/profile/index', [
+            'profile' => $profile,
+            'role'=> 'Asatidz'
         ]);
     }
 }
