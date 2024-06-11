@@ -34,7 +34,6 @@ class AuthController extends Controller
         $this->view('pages/auth/user/login');
     }
 
-<<<<<<< HEAD
     public function viewLoginAdmin()
     {
         $this->view('pages/auth/admin/login');
@@ -57,6 +56,11 @@ class AuthController extends Controller
     public function viewRegisterAsatidz()
     {
         $this->view('pages/auth/user/register_asatidz');
+    }
+
+    public function registerAsatidz(){
+        var_dump($this->request->all());
+        die;
     }
 
     public function registerSantri()
@@ -149,15 +153,5 @@ class AuthController extends Controller
 
         header('Location: /loginsantri');
         exit();
-=======
-    public function registerAsatidz(){
-        // var_dump($this->request->name);
-        return $this->view('pages/auth/user/register_asatidz');
-    }
-
-    public function storeAsatidz(){
-        var_dump($this->request->all());
-        die;
->>>>>>> 2062709 (--wip--)
     }
 }

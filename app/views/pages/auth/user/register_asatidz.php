@@ -115,7 +115,7 @@
 </head>
 
 <body>
-    <form class="container" action="proses_registrasi_asatidz.php" method="POST" enctype="multipart/form-data">
+    <form class="container" action="/signup-asatidz" method="POST" enctype="multipart/form-data">
         <div>
             <h2>Registrasi Asatidz</h2>
             <div>
