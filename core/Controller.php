@@ -2,8 +2,15 @@
 
 namespace core;
 
+use core\RequestHandler;
+
 class Controller
 {
+    public $request;
+    public function __construct(){
+        $this->request = new RequestHandler();
+    }
+
     protected function view($filename = '', $data = [])
     {
         extract($data);
