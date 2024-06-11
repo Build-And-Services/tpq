@@ -17,9 +17,10 @@ class User extends Model
         return $result ? $result[0] : null;
     }
 
-    public function getProfile($id_user, $role) {
-        if($role == 'admin'){
-        $sql = "
+    public function getProfile($id_user, $role)
+    {
+        if ($role == 'admin') {
+            $sql = "
             SELECT 
                 u.id_user,
                 u.name,
@@ -32,8 +33,8 @@ class User extends Model
             WHERE 
                 u.id_user = :id_user
         ";
-        }else{
-                    $sql = "
+        } else {
+            $sql = "
             SELECT 
                 u.id_user,
                 u.name,
@@ -45,7 +46,7 @@ class User extends Model
             FROM 
                 users u
             JOIN 
-                ".$role." a ON u.id_user = a.id_user
+                " . $role . " a ON u.id_user = a.id_user
             JOIN
                 kategori k ON k.id_kategori = a.id_kategori
             WHERE 
@@ -61,39 +62,42 @@ class User extends Model
         return $result;
     }
 
-    public function getRoles($role){
+    public function getRoles($role)
+    {
         $sql = "";
-        if($role == 'santri'){
+        if ($role == 'santri') {
             $sql = "
                 SELECT 
                     u.id_user,
                     u.name,
                     u.email,
+                    u.status,
                     a.tgl_lahir,
                     a.jenis_kelamin,
                     a.bukti_pembayaran
                 FROM 
                     users u
                 JOIN 
-                    ".$role." a ON u.id_user = a.id_user
+                    " . $role . " a ON u.id_user = a.id_user
                 WHERE 
-                    u.role = '".$role."'
+                    u.role = '" . $role . "'
             ";
-        }else if($role == 'santri'){
+        } else if ($role == 'asatidz') {
             $sql = "
                 SELECT 
                     u.id_user,
                     u.name,
                     u.email,
+                    u.status,
                     a.tgl_lahir,
                     a.jenis_kelamin,
                     a.bukti_ketersedian_mengajar
                 FROM 
                     users u
                 JOIN 
-                    ".$role." a ON u.id_user = a.id_user
+                    " . $role . " a ON u.id_user = a.id_user
                 WHERE 
-                    u.role = '".$role."'
+                    u.role = '" . $role . "'
             ";
         }
         $prepare = $this->pdo->prepare($sql);
@@ -103,7 +107,8 @@ class User extends Model
 
     }
 
-    public function getProfileAsatidz($id_user) {
+    public function getProfileAsatidz($id_user)
+    {
         $sql = "
             SELECT 
                 u.id_user,
@@ -153,10 +158,10 @@ class User extends Model
 
     public function deleteUser($id_user, $role)
     {
-      
+
         try {
-            
-            $sql = "DELETE FROM ".$role." WHERE id_user = :id_user; DELETE FROM users WHERE id_user = :id_user;";
+
+            $sql = "DELETE FROM " . $role . " WHERE id_user = :id_user; DELETE FROM users WHERE id_user = :id_user;";
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
             $stmt->execute();
@@ -166,4 +171,21 @@ class User extends Model
             return false;
         }
     }
+
+    public function updateUserStatus($id_user, $new_status)
+    {
+        try {
+            $sql = "UPDATE users SET status = :new_status WHERE id_user = :id_user";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+            $stmt->bindParam(':new_status', $new_status, PDO::PARAM_STR);
+            $stmt->execute();
+
+            return $stmt->rowCount();
+        } catch (\PDOException $e) {
+            error_log('Error: ' . $e->getMessage());
+            return false;
+        }
+    }
+
 }

@@ -37,4 +37,4 @@ Router::post('/kelas/update', 'KelasController', 'update');
 Router::get('/datatpq', 'DataTpqController', 'index');
 Router::get('/datatpq/{id}', 'DataTpqController', 'edit');
 Router::get('/datatpq/delete/{id}', 'DataTpqController', 'destroy');
-Router::post('/datatpq/update', 'DataTpqController', 'update');
+Router::post('/datatpq/update/{id}', 'DataTpqController', 'update');

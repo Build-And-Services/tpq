@@ -18,7 +18,8 @@ class DataTpqController extends Controller
         }
     }
 
-    public function index(){
+    public function index()
+    {
         $user = new User();
         $santri = $user->getRoles('santri');
         $asatidz = $user->getRoles('asatidz');
@@ -29,9 +30,15 @@ class DataTpqController extends Controller
         ]);
     }
 
-    public function update(){}
+    public function update($data)
+    {
+        $user = new User();
+        $user->updateUserStatus($data['id'], 'ACCEPT');
+        header('Location: /datatpq');
+    }
 
-    public function destroy($data){
+    public function destroy($data)
+    {
         $user = new User();
         $u = $user->where(['id_user' => $data['id']])[0];
         $user->deleteUser($u->id_user, $u->role);
