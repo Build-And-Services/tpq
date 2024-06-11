@@ -20,4 +20,10 @@ Router::get('/kegiatan', 'KegiatanController', 'index');
 Router::post('/kegiatan/store', 'KegiatanController', 'store');
 Router::post('/kegiatan/update/{id}', 'KegiatanController', 'update');
 Router::get('/kegiatan/delete/{id}', 'KegiatanController', 'destroy');
+Router::get('/kehadiran', 'KehadiranController', 'index');
+Router::get('/kehadiran/create', 'KehadiranController', 'add');
+Router::post('/kehadiran/store', 'KehadiranController', 'store');
+Router::get('/penilaian', 'PenilaianController', 'index');
+Router::get('/penilaian/create', 'PenilaianController', 'add');
+Router::post('/penilaian/store', 'PenilaianController', 'store');
 

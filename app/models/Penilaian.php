@@ -16,7 +16,8 @@ class Penilaian extends Model
         $sql = "
             SELECT p.*, u.name 
             FROM {$this->table} p
-            JOIN users u ON p.id_user = u.id
+            JOIN users u ON p.id_user = u.id_user
+            WHERE u.role = 'santri'
         ";
         $prepare = $this->pdo->prepare($sql);
         $prepare->execute();

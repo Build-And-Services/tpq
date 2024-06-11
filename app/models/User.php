@@ -47,4 +47,17 @@ class User extends Model
         $result = $prepare->fetch(PDO::FETCH_OBJ);
         return $result;
     }
+
+    public function getRole()
+    {
+        $sql = "
+            SELECT *
+            FROM {$this->table}
+            WHERE role = 'santri'
+        ";
+        $prepare = $this->pdo->prepare($sql);
+        $prepare->execute();
+        $result = $prepare->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
 }
