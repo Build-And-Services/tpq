@@ -12,11 +12,14 @@ class AuthController extends Controller
 {
     public function index()
     {
-        $this->view('welcome');
+        if ($this->isAuthenticated()) {
+            header('Location: /dashboard');
+            exit();
+        }
+        $this->view('landing');
     }
-    public function loginUser()
+    public function pageLogin()
     {
         $this->view('pages/auth/user/login');
     }
-
 }
