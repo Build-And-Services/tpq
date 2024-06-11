@@ -115,10 +115,10 @@
 </head>
 
 <body>
-    <div class="container">
+    <form class="container" action="proses_registrasi_asatidz.php" method="POST" enctype="multipart/form-data">
         <div>
             <h2>Registrasi Asatidz</h2>
-            <form action="proses_registrasi_asatidz.php" method="POST" enctype="multipart/form-data">
+            <div>
                 <input type="text" name="nama_asatidz" placeholder="Nama Lengkap" required>
                 <input type="date" name="tgl_lahir" placeholder="Tanggal Lahir" required>
                 <select name="jenis_kelamin" required>
@@ -133,11 +133,11 @@
                 <input type="text" name="no_telepon" placeholder="Nomor Telepon" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
-            </form>
+            </div>
         </div>
         <div class="right-column">
             <h2>Pilihan Kategori</h2>
-            <form action="proses_registrasi_asatidz.php" method="POST" enctype="multipart/form-data">
+            <div>
                 <div class="checkbok-kategori">
                     <label for="ketersedia_mengajar" class="label_category">Anak-anak</label>
                     <input type="checkbox" name="kategori_anak" value="anak-anak">
@@ -162,13 +162,13 @@
                 <div class="submit-section">
                     <input type="submit" value="Daftar">
                 </div>
-            </form>
+            </div>
 
         </div>
         <div class="login-link">
             <p>Sudah punya akun? <a href="/loginasatidz" data-route="/loginasatidz">Login disini</a></p>
         </div>
-    </div>
+    </form>
 </body>
 
 </html>
