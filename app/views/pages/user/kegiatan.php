@@ -1,235 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil TPQ Al-Hikmah</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        /* CSS styling */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
+<?php
+$title = 'Kegiatan';
+ob_start();
+?>
 
-        header {
-            background-color: #4CAF50;
-            padding: 10px 0;
-            text-align: center;
-        }
-
-        .header-utama {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            background-color: #4CAF50;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-        }
-
-        .header-content .logo-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .header-content h1 {
-            color: white;
-            font-size: 20px;
-            margin: 0;
-        }
-
-        .header-content img {
-            margin-right: 10px;
-            width: 60px;
-        }
-
-        nav {
-            display: flex;
-            justify-content: flex-end;
-            position: relative;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 20px;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: yellow;
-        }
-
-        nav a:active {
-            color: red;
-        }
-
-        .profile-menu {
-            position: relative;
-            display: inline-block;
-            margin-top: 10px;
-        }
-
-        .profile-menu-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 110px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            right: -10px;
-            top: 30px;
-            border-radius: 5px;
-            padding: 10px 0;
-        }
-
-        .profile-menu-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            transition: background-color 0.3s;
-        }
-
-        .profile-menu-content a:hover {
-            background-color: #ddd;
-        }
-
-        .profile-menu:hover .profile-menu-content {
-            display: block;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 90px auto 20px;
-            padding: 0 20px;
-        }
-
-        .content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .grid-item {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .grid-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .grid-item .description {
-            padding: 15px;
-            text-align: justify;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="header-utama">
-        <header>
-            <div class="header-content">
-                <div class="logo-container">
-                    <img src="Picture/logo_tpq.png" alt="Logo TPQ">
-                    <h1>TPQ Al-Hikmah Universitas Jember</h1>
-                </div>
-                <nav>
-                    <a href="beranda_santri.php">Beranda</a>
-                    <a href="kelas_santri.php">Kelas</a>
-                    <a href="kegiatan_santri.php">Kegiatan</a>
-                    <div class="profile-menu">
-                        <a href="#" onclick="toggleProfileDropdown()"><i class="fas fa-user"></i></a>
-                        <div class="profile-menu-content" id="profileDropdown">
-                            <a href="profil_santri.php">Lihat Profil</a>
-                            <a href="../landing/beranda_landing.php" onclick="logout()">Logout</a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </header>
-    </div>
-    <section class="container">
-        <div class="content">
-            <h2>Kegiatan TPQ Al-Hikmah</h2>
-            <div class="grid-container">
-                <div class="grid-item">
-                    <img src="Picture/launching.jpeg" alt="Kegiatan 1">
-                    <div class="description">
-                        <p>Launching Taman Pendidikan Al-Qur'an (TPQ) Al-Hikmah Universitas Jember</p>
-                    </div>
-                </div>
-                <div class="grid-item">
-                    <img src="Picture/Pembelajaran-akhwat.jpeg" alt="Kegiatan 2">
-                    <div class="description">
-                        <p>Dokumentasi Kegiatan Pembelajaran Akhwat TPQ AL-HIKMAH Universitas Jember</p>
-                    </div>
-                </div>
-                <div class="grid-item">
-                    <img src="Picture/Pembelajaran-ikhwan.jpeg" alt="Kegiatan 3">
-                    <div class="description">
-                        <p>Dokumentasi Kegiatan Pembelajaran Ikhwan TPQ AL-HIKMAH Universitas Jember</p>
-                    </div>
-                </div>
-                <div class="grid-item">
-                    <img src="Picture/Munaqasyah-akhwat.jpeg" alt="Kegiatan 4">
-                    <div class="description">
-                        <p>Dokumentasi Kegiatan Munaqasyah Akhwat TPQ AL-HIKMAH Universitas Jember</p>
-                    </div>
-                </div>
-                <div class="grid-item">
-                    <img src="Picture/Munaqasyah_ikhwan.jpeg" alt="Kegiatan 4">
-                    <div class="description">
-                        <p>Dokumentasi Kegiatan Munaqasyah Ikhwan TPQ AL-HIKMAH Universitas Jember</p>
-                    </div>
-                </div>
-                <!-- Tambahkan kegiatan lainnya sesuai kebutuhan -->
-            </div>
+<section class="max-w-7xl mx-auto py-10">
+    <div class="bg-white p-4 rounded shadow-xl">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="font-bold text-2xl">Kegiatan TPQ Al-Hikmah</h2>
+            <button id="openKegiatanModal" class="bg-[#4CAF50] px-3 py-1 text-white rounded">Tambah Kegiatan</button>
         </div>
-    </section>
-    <footer>
-            <p>Hak Cipta &copy; 2024 - TPQ Al-Hikmah</p>
-        </footer>
-    </body>
-    <script>
-        // JavaScript untuk menampilkan/menyembunyikan dropdown profil
-        function toggleProfileDropdown() {
-            var dropdown = document.getElementById("profileDropdown");
-            if (dropdown.style.display === "block") {
-                dropdown.style.display = "none";
-            } else {
-                dropdown.style.display = "block";
-            }
+        <div class="grid grid-cols-3 gap-4">
+            <?php foreach ($kegiatan as $item): ?>
+                <div class="rounded-md overflow-hidden p-4">
+                    <img src="<?php echo $item->foto; ?>" alt="<?php echo $item->nama_kegiatan; ?>"
+                        class="aspect-video object-cover rounded-md">
+                    <small class="py-2 block"><?php echo $item->tanggal; ?></small>
+                    <h3 class="font-bold"><?php echo $item->nama_kegiatan; ?></h3>
+                    <p><?php echo $item->deskripsi ?></p>
+                    <div class="mt-2 flex gap-2">
+                        <button data-id="<?php echo $item->id; ?>" data-nama="<?php echo $item->nama_kegiatan; ?>"
+                            data-deskripsi="<?php echo $item->deskripsi; ?>" data-tanggal="<?php echo $item->tanggal; ?>"
+                            class="px-1 bg-gray-100 border-gray-400 border edit-kegiatan">Edit</button>
+                        <a href="/kegiatan/delete/<?= $item->id; ?>" class="px-1 bg-gray-100 border-gray-400 border"
+                            onclick="return confirm('Apakah kamu yakin akan menghapus data tersebut?')">Hapus</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div id="kegiatanModal" class="modal hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded shadow-lg max-w-lg w-full relative">
+        <span id="closeModal" class="absolute top-2 right-2 text-2xl cursor-pointer">&times;</span>
+        <h2 id="modalTitle" class="font-bold text-xl mb-4">Tambah Kegiatan Baru</h2>
+        <form id="modalForm" action="" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="kegiatan_id" id="kegiatan_id">
+            <div class="mb-4">
+                <label for="nama_kegiatan" class="block text-sm font-medium text-gray-700">Nama Kegiatan</label>
+                <input type="text" name="nama_kegiatan" id="nama_kegiatan"
+                    class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-green-200">
+            </div>
+            <div class="mb-4">
+                <label for="foto" class="block text-sm font-medium text-gray-700">Foto Kegiatan</label>
+                <input type="file" name="foto" id="foto"
+                    class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-green-200">
+            </div>
+            <div class="mb-4">
+                <label for="deskripsi" class="block text-sm font-medium text-gray-700">Deskripsi</label>
+                <textarea name="deskripsi" id="deskripsi" rows="3"
+                    class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-green-200"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
+                <input type="date" name="tanggal" id="tanggal"
+                    class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-green-200">
+            </div>
+            <div class="flex justify-end">
+                <button type="button" id="closeModalBtn"
+                    class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded mr-2">Batal</button>
+                <button type="submit"
+                    class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var modal = document.getElementById("kegiatanModal");
+        var modalTitle = document.getElementById("modalTitle");
+        var modalForm = document.getElementById("modalForm");
+        var closeModalBtn = document.getElementById("closeModal");
+
+        function openModal(title, action) {
+            modalTitle.innerText = title;
+            modalForm.action = action;
+            modal.classList.remove("hidden");
         }
-    </script>
-</html>
+
+        function closeModal() {
+            modal.classList.add("hidden");
+        }
+
+        document.getElementById("openKegiatanModal").addEventListener("click", function () {
+            openModal("Tambah Kegiatan Baru", "/kegiatan/store"); // Set action for store
+        });
+
+        document.querySelectorAll(".edit-kegiatan").forEach(function (button) {
+            button.addEventListener("click", function () {
+                var nama = this.getAttribute("data-nama");
+                var deskripsi = this.getAttribute("data-deskripsi");
+                var tanggal = this.getAttribute("data-tanggal");
+                var id = this.getAttribute("data-id");
+                document.getElementById("nama_kegiatan").value = nama;
+                document.getElementById("deskripsi").value = deskripsi;
+                document.getElementById("tanggal").value = tanggal;
+                document.getElementById("kegiatan_id").value = id; // Set the kegiatan id for edit mode
+                openModal("Edit Kegiatan", "/kegiatan/update/" + id); // Set action for edit
+            });
+        });
+
+        closeModalBtn.addEventListener("click", closeModal);
+    });
+</script>
+
+
+<?php
+$content = ob_get_clean();
+include __DIR__ . '/../../layouts/index.php';
+?>
