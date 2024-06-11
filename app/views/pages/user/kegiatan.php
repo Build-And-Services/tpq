@@ -7,7 +7,9 @@ ob_start();
     <div class="bg-white p-4 rounded shadow-xl">
         <div class="flex items-center justify-between mb-8">
             <h2 class="font-bold text-2xl">Kegiatan TPQ Al-Hikmah</h2>
-            <button id="openKegiatanModal" class="bg-[#4CAF50] px-3 py-1 text-white rounded">Tambah Kegiatan</button>
+            <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+                <button id="openKegiatanModal" class="bg-[#4CAF50] px-3 py-1 text-white rounded">Tambah Kegiatan</button>
+            <?php endif; ?>
         </div>
         <div class="grid grid-cols-3 gap-4">
             <?php foreach ($kegiatan as $item): ?>
@@ -17,13 +19,15 @@ ob_start();
                     <small class="py-2 block"><?php echo $item->tanggal; ?></small>
                     <h3 class="font-bold"><?php echo $item->nama_kegiatan; ?></h3>
                     <p><?php echo $item->deskripsi ?></p>
-                    <div class="mt-2 flex gap-2">
-                        <button data-id="<?php echo $item->id; ?>" data-nama="<?php echo $item->nama_kegiatan; ?>"
-                            data-deskripsi="<?php echo $item->deskripsi; ?>" data-tanggal="<?php echo $item->tanggal; ?>"
-                            class="px-1 bg-gray-100 border-gray-400 border edit-kegiatan">Edit</button>
-                        <a href="/kegiatan/delete/<?= $item->id; ?>" class="px-1 bg-gray-100 border-gray-400 border"
-                            onclick="return confirm('Apakah kamu yakin akan menghapus data tersebut?')">Hapus</a>
-                    </div>
+                    <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+                        <div class="mt-2 flex gap-2">
+                            <button data-id="<?php echo $item->id; ?>" data-nama="<?php echo $item->nama_kegiatan; ?>"
+                                data-deskripsi="<?php echo $item->deskripsi; ?>" data-tanggal="<?php echo $item->tanggal; ?>"
+                                class="px-1 bg-gray-100 border-gray-400 border edit-kegiatan">Edit</button>
+                            <a href="/kegiatan/delete/<?= $item->id; ?>" class="px-1 bg-gray-100 border-gray-400 border"
+                                onclick="return confirm('Apakah kamu yakin akan menghapus data tersebut?')">Hapus</a>
+                        </div>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         </div>
