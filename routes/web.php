@@ -26,4 +26,5 @@ Router::post('/kehadiran/store', 'KehadiranController', 'store');
 Router::get('/penilaian', 'PenilaianController', 'index');
 Router::get('/penilaian/create', 'PenilaianController', 'add');
 Router::post('/penilaian/store', 'PenilaianController', 'store');
+Router::get('/profile', 'ProfilAsatidzController', 'index');
 
