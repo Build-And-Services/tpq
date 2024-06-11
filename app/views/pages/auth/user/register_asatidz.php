@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,11 +13,14 @@
             padding: 0;
             background-color: #f0f0f0;
             /* Set background image */
-            background-image: url('Picture/masjid2.jpg');
+            background-image: url("<?php echo BASE_URL; ?>/images/masjid2.jpg");
             /* Atur properti background */
-            background-size: cover; /* Menutupi seluruh area body */
-            background-repeat: no-repeat; /* Tidak mengulang gambar */
-            background-position: center; /* Posisikan gambar di tengah */
+            background-size: cover;
+            /* Menutupi seluruh area body */
+            background-repeat: no-repeat;
+            /* Tidak mengulang gambar */
+            background-position: center;
+            /* Posisikan gambar di tengah */
         }
 
         .container {
@@ -31,7 +35,7 @@
             flex-wrap: wrap;
         }
 
-        .container > * {
+        .container>* {
             flex: 1 1 50%;
             padding: 20px;
             box-sizing: border-box;
@@ -98,8 +102,18 @@
         .login-link a:hover {
             text-decoration: underline;
         }
+
+        .checkbok-kategori {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .label_category {
+            width: 300px;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div>
@@ -124,24 +138,37 @@
         <div class="right-column">
             <h2>Pilihan Kategori</h2>
             <form action="proses_registrasi_asatidz.php" method="POST" enctype="multipart/form-data">
-                <input type="checkbox" name="kategori[]" value="anak-anak"> Anak-anak<br>
-                <input type="checkbox" name="kategori[]" value="remaja"> Remaja<br>
-                <input type="checkbox" name="kategori[]" value="dewasa"> Dewasa<br>
-                <label for="motivasi">Motivasi Mengajar:</label>
-                <textarea name="motivasi" id="motivasi" rows="4" required></textarea>
+                <div class="checkbok-kategori">
+                    <label for="ketersedia_mengajar" class="label_category">Anak-anak</label>
+                    <input type="checkbox" name="kategori_anak" value="anak-anak">
+                </div>
+                <div class="checkbok-kategori">
+                    <label for="ketersedia_mengajar" class="label_category">Remaja</label>
+                    <input type="checkbox" name="kategori_remaja" value="remaja">
+                </div>
+                <div class="checkbok-kategori">
+                    <label for="ketersedia_mengajar" class="label_category">Dewasa</label>
+                    <input type="checkbox" name="kategori_dewasa" value="dewasa">
+                </div>
+                <div class="checkbok-kategori">
+
+                    <label for="motivasi">Motivasi Mengajar:</label>
+                    <textarea name="motivasi" id="motivasi" rows="4" required></textarea>
+                </div>
                 <label for="ketersedia_mengajar">Unggah Bukti Ketersediaan Mengajar:</label>
-                <input type="file" name="ketersedia_mengajar" id="ketersedia_mengajar" accept="image/*" required>
+                <input type="file" name="ketersedia_mengajar" style="margin-top: 10px;" id="ketersedia_mengajar" accept="image/*" required>
                 <label for="syahadah_tilawati">Unggah Bukti Syahadah Tilawati:</label>
-                <input type="file" name="syahadah_tilawati" id="syahadah_tilawati" accept="image/*" required>            
+                <input type="file" name="syahadah_tilawati" style="margin-top: 10px;" id="syahadah_tilawati" accept="image/*" required>
                 <div class="submit-section">
-                <input type="submit" value="Daftar">
+                    <input type="submit" value="Daftar">
                 </div>
             </form>
 
         </div>
         <div class="login-link">
-            <p>Sudah punya akun? <a href="login_asatidz.php">Login disini</a></p>
+            <p>Sudah punya akun? <a href="/loginasatidz" data-route="/loginasatidz">Login disini</a></p>
         </div>
     </div>
 </body>
+
 </html>

@@ -3,9 +3,9 @@ $title = 'Welcome';
 ob_start();
 ?>
 
-<?php include 'components/section.php' ?>
+<?php include __DIR__ . '/components/section.php' ?>
 
 <?php
 $content = ob_get_clean();
-include 'layouts/index.php';
+include __DIR__ . '/layouts/index.php';
 ?>
