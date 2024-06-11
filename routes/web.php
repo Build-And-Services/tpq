@@ -17,6 +17,7 @@ Router::get('/register-asatidz', 'AuthController', 'viewRegisterAsatidz');
 Router::post('/signup-santri', 'AuthController', 'registerSantri');
 Router::post('/signup-asatidz', 'AuthController', 'registerAsatidz');
 Router::post('/login', 'AuthController', 'login');
+Router::get('/logout', 'AuthController', 'logout');
 Router::get('/kegiatan', 'KegiatanController', 'index');
 Router::post('/kegiatan/store', 'KegiatanController', 'store');
 Router::post('/kegiatan/update/{id}', 'KegiatanController', 'update');

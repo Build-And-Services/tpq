@@ -36,11 +36,11 @@ class User extends Model
             WHERE 
                 u.id_user = :id_user
         ";
+        // var_dump($sql);
         $prepare = $this->pdo->prepare($sql);
         $prepare->bindValue(':id_user', $id_user, PDO::PARAM_INT);
         $prepare->execute();
         $result = $prepare->fetch(PDO::FETCH_OBJ);
-        // var_dump($result);
         return $result;
     }
 

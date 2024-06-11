@@ -41,6 +41,10 @@ ob_start();
 
             </p>
         </div>
+
+        <div class="mt-5">
+            <a href="/logout" class="bg-red-500 px-8 py-2 rounded-md text-white font-semibold block w-fit">Logout</a>
+        </div>
     </div>
 </div>
 
