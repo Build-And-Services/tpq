@@ -33,3 +33,8 @@ Router::get('/profile', 'ProfilAsatidzController', 'index');
 Router::get('/kelas', 'KelasController', 'index');
 Router::get('/kelas/delete/{id}', 'KelasController', 'destroy');
 Router::post('/kelas/update', 'KelasController', 'update');
+
+Router::get('/datatpq', 'DataTpqController', 'index');
+Router::get('/datatpq/{id}', 'DataTpqController', 'edit');
+Router::get('/datatpq/delete/{id}', 'DataTpqController', 'destroy');
+Router::post('/datatpq/update', 'DataTpqController', 'update');

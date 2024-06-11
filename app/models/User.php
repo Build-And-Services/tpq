@@ -44,6 +44,48 @@ class User extends Model
         return $result;
     }
 
+    public function getRoles($role){
+        $sql = "";
+        if($role == 'santri'){
+            $sql = "
+                SELECT 
+                    u.id_user,
+                    u.name,
+                    u.email,
+                    a.tgl_lahir,
+                    a.jenis_kelamin,
+                    a.bukti_pembayaran
+                FROM 
+                    users u
+                JOIN 
+                    ".$role." a ON u.id_user = a.id_user
+                WHERE 
+                    u.role = '".$role."'
+            ";
+        }else{
+            $sql = "
+                SELECT 
+                    u.id_user,
+                    u.name,
+                    u.email,
+                    a.tgl_lahir,
+                    a.jenis_kelamin,
+                    a.bukti_ketersedian_mengajar
+                FROM 
+                    users u
+                JOIN 
+                    ".$role." a ON u.id_user = a.id_user
+                WHERE 
+                    u.role = '".$role."'
+            ";
+        }
+        $prepare = $this->pdo->prepare($sql);
+        $prepare->execute();
+        $result = $prepare->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+
+    }
+
     public function getProfileAsatidz($id_user) {
         $sql = "
             SELECT 
@@ -90,5 +132,21 @@ class User extends Model
         $prepare->execute();
         $result = $prepare->fetchAll(PDO::FETCH_OBJ);
         return $result;
+    }
+
+    public function deleteUser($id_user, $role)
+    {
+      
+        try {
+            
+            $sql = "DELETE FROM ".$role." WHERE id_user = :id_user; DELETE FROM users WHERE id_user = :id_user;";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->rowCount();
+        } catch (\PDOException $e) {
+            error_log('Error: ' . $e->getMessage());
+            return false;
+        }
     }
 }

@@ -4,13 +4,16 @@ ob_start();
 ?>
 <section class="max-w-7xl mx-auto py-10 min-h-dvh">
     <div class="bg-white p-4 rounded shadow-xl space-y-4">
-        <div class="space-y-2">
-            <h1 class="font-bold text-2xl">Kelas Dewasa</h1>
-            <p>Deskripsi tentang kelas dewasa disini</p>
-            <a href="#" class="bg-[#4CAF50] block w-fit px-3 py-1 text-white text-lg rounded-md font-semibold">Gabung ke
-                Kelas
-                Dewasa</a>
-        </div>
+
+        <?php if($_SESSION['user']['role'] != 'admin'): ?>
+            <div class="space-y-2">
+                <h1 class="font-bold text-2xl">Kelas Dewasa</h1>
+                <p>Deskripsi tentang kelas dewasa disini</p>
+                <a href="#" class="bg-[#4CAF50] block w-fit px-3 py-1 text-white text-lg rounded-md font-semibold">Gabung ke
+                    Kelas
+                    Dewasa</a>
+            </div>
+        <?php endif; ?>
         <div class="space-y-2">
             <h1 class="font-bold text-2xl">Daftar Kelas</h1>
             <table class="w-full">

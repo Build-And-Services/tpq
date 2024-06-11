@@ -22,8 +22,7 @@
                 <?php
                 if (isset($_SESSION['user'])) { ?>
                     <li><a class="md:p-4 py-3 px-0 block" href="/" data-route="/">Beranda</a></li>
-                    <li><a class="md:p-4 py-3 px-0 block" href="#">Kelas</a></li>
-                    <li><a class="md:p-4 py-3 px-0 block" href="/user">User</a></li>
+                    <li><a class="md:p-4 py-3 px-0 block" href="/kelas">Kelas</a></li>
                     <li><a class="md:p-4 py-3 px-0 block" href="/kegiatan">Kegiatan</a></li>
                     <?php
                     if ($_SESSION['user']['role'] === 'admin') { ?>
