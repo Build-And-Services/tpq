@@ -5,13 +5,26 @@ ob_start();
 <section class="max-w-7xl mx-auto py-10 min-h-dvh">
     <div class="bg-white p-4 rounded shadow-xl space-y-4">
 
-        <?php if($_SESSION['user']['role'] != 'admin'): ?>
+        <?php if ($_SESSION['user']['role'] != 'admin'): ?>
             <div class="space-y-2">
                 <h1 class="font-bold text-2xl">Kelas Dewasa</h1>
                 <p>Deskripsi tentang kelas dewasa disini</p>
-                <a href="#" class="bg-[#4CAF50] block w-fit px-3 py-1 text-white text-lg rounded-md font-semibold">Gabung ke
-                    Kelas
-                    Dewasa</a>
+                <div class="flex justify-between">
+                    <a target="_blank"
+                        href="https://sso.unej.ac.id/cas/login?service=https%3A%2F%2Fmmp.unej.ac.id%2Flogin%2Findex.php"
+                        class="bg-[#4CAF50] block w-fit px-3 py-1 text-white text-lg rounded-md font-semibold">Gabung ke
+                        Kelas
+                        Dewasa</a>
+                    <?php if ($_SESSION['user']['role'] == 'asatidz'): ?>
+                        <a href="/kehadiran"
+                            class="bg-[#4CAF50] block w-fit px-3 py-1 text-white text-lg rounded-md font-semibold">
+                            Presensi Daftar Hadir</a>
+                        <a href="/penilaian"
+                            class="bg-[#4CAF50] block w-fit px-3 py-1 text-white text-lg rounded-md font-semibold">Presensi
+                            Santri di Kelas
+                        </a>
+                    <?php endif; ?>
+                </div>
             </div>
         <?php endif; ?>
         <div class="space-y-2">
