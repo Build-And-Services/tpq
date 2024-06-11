@@ -127,10 +127,12 @@
                     <option value="Perempuan">Perempuan</option>
                 </select>
                 <input type="text" name="alamat" placeholder="Alamat Lengkap" required>
-                <input type="text" name="id_kabupaten" placeholder="ID Kabupaten" required>
-                <input type="text" name="id_asal_instansi" placeholder="ID Asal Instansi" required>
-                <input type="text" name="id_kategori" placeholder="ID Kategori" required>
-                <input type="text" name="no_telepon" placeholder="Nomor Telepon" required>
+                <select name="id_asal_instansi" required>
+                    <option value="" disabled selected>Pilih Jenis Instansi</option>
+                    <option value="1">Universitas Jember</option>
+                    <option value="2">Politeknik Jember</option>
+                </select>
+                <input type="text" max="12" name="no_telepon" placeholder="Nomor Telepon" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
             </div>
@@ -140,15 +142,15 @@
             <div>
                 <div class="checkbok-kategori">
                     <label for="ketersedia_mengajar" class="label_category">Anak-anak</label>
-                    <input type="checkbox" name="kategori_anak" value="anak-anak">
+                    <input type="radio" name="id_kategori" value="1">
                 </div>
                 <div class="checkbok-kategori">
                     <label for="ketersedia_mengajar" class="label_category">Remaja</label>
-                    <input type="checkbox" name="kategori_remaja" value="remaja">
+                    <input type="radio" name="id_kategori" value="2">
                 </div>
                 <div class="checkbok-kategori">
                     <label for="ketersedia_mengajar" class="label_category">Dewasa</label>
-                    <input type="checkbox" name="kategori_dewasa" value="dewasa">
+                    <input type="radio" name="id_kategori" value="3">
                 </div>
                 <div class="checkbok-kategori">
 
