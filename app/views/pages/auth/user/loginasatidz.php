@@ -30,7 +30,7 @@ ob_start();
     </div>
 
     <div class="mt-10">
-      <form action="#">
+      <form action="/login" method="post">
         <div class="flex flex-col mb-5">
           <label for="email" class="mb-1 text-xs tracking-wide text-gray-600">Email Address:</label>
           <div class="relative">

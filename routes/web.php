@@ -15,4 +15,4 @@ Router::get('/loginasatidz', 'AuthController', 'viewLoginAsatidz');
 Router::get('/register-santri', 'AuthController', 'viewRegisterSantri');
 Router::get('/register-asatidz', 'AuthController', 'viewRegisterAsatidz');
 Router::post('/signup-santri', 'AuthController', 'registerSantri');
-Router::post('/login-santri', 'AuthController', 'loginSantri');
+Router::post('/login', 'AuthController', 'login');
