@@ -184,7 +184,7 @@ class AuthController extends Controller
                 $hashedPassword = $user->password;
                 if (password_verify($password, $hashedPassword)) {
                     $_SESSION['user'] = [
-                        'id' => $user->id,
+                        'id' => $user->id_user,
                         'name' => $user->name,
                         'email' => $user->email,
                         'role' => $user->role,
@@ -201,5 +201,10 @@ class AuthController extends Controller
 
         header('Location: /loginsantri');
         exit();
+    }
+
+    public function logout(){
+        session_destroy();
+        header('Location: /');
     }
 }
