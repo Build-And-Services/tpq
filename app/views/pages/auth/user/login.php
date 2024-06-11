@@ -4,111 +4,11 @@ ob_start();
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-    }
-
-    header {
-        background-color: #4CAF50;
-        padding: 10px 0;
-        text-align: center;
-    }
-
-    .header-utama {
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 1000;
-        background-color: #4CAF50;
-    }
-
-    .header-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 20px;
-    }
-
-    .header-content .logo-container {
-        display: flex;
-        align-items: center;
-    }
-
-    .header-content h1 {
-        color: white;
-        font-size: 20px;
-        margin: 0;
-    }
-
-    .header-content img {
-        margin-right: 10px;
-        width: 60px;
-    }
-
-    nav {
-        display: flex;
-        justify-content: flex-end;
-        position: relative;
-    }
-
-    nav a {
-        color: #fff;
-        text-decoration: none;
-        padding: 10px 20px;
-        transition: color 0.3s;
-    }
-
-    nav a:hover {
-        color: yellow;
-    }
-
-    nav a:active {
-        color: red;
-    }
-
-    .profile-menu {
-        position: relative;
-        display: inline-block;
-    }
-
-    .menu-link {
-        display: block;
-        padding: 10px;
-        background-color: white;
-        color: #4caf50;
-        /* warna hijau */
-        border-radius: 30px;
-    }
-
-    .profile-menu-content {
-        display: none;
-        position: absolute;
-        background-color: white;
-        min-width: 160px;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        z-index: 1;
-        border-radius: 30px;
-    }
-
-    .profile-menu-content a {
-        color: black;
-        padding: 10px;
-        text-decoration: none;
-        display: block;
-    }
-
-    .profile-menu-content a:hover {
-        background-color: #f1f1f1;
-    }
-
     .container {
         text-align: center;
         display: flex;
         justify-content: center;
-        margin-top: 100px;
+        margin-top: 90px;
     }
 
     .login-option {
@@ -144,20 +44,20 @@ ob_start();
     }
 </style>
 
-<div class="container">
+<div class="container mb-36">
     <div class="login-option">
         <img src="<?php echo BASE_URL; ?>/images/santri.png" alt="Logo TPQ" alt="Santri">
         <br>
-        <a href="#" class="login-button" id="login-santri-button">Login Santri</a>
+        <a href="/loginsantri" data-route="/loginsantri" class="login-button">Login Santri</a>
     </div>
     <div class="login-option">
         <img src="<?php echo BASE_URL; ?>/images/asatidz.png" alt="Logo TPQ" alt="Santri">
         <br>
-        <a href="#" class="login-button" id="login-asatidz-button">Login Asatidz</a>
+        <a href="/loginasatidz" data-route="/loginasatidz" class="login-button"">Login Asatidz</a>
     </div>
 </div>
 
 <?php
 $content = ob_get_clean();
-include_once __DIR__ . '../../../../layouts/guest.php';
+include_once __DIR__ . '../../../../layouts/index.php';
 ?>
