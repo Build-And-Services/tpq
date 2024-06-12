@@ -218,5 +218,73 @@ class User extends Model
             return false;
         }
     }
+    public function updateUser($id_user, $name, $email) {
+        $sql = "UPDATE users SET name = :name, email = :email WHERE id_user = :id_user";
+        $prepare = $this->pdo->prepare($sql);
+        $result = $prepare->execute([':name' => $name, ':email' => $email, ':id_user' => $id_user]);
+        return $result;
+    }
+
+    public function updateProfile($id_user, $name, $email, $tgl_lahir, $jenis_kelamin, $alamat, $id_kategori) {
+        $role = $this->getUserRole($id_user);
+        switch ($role) {
+            case 'asatidz':
+                $santriUpdated = $this->updateSantri($id_user, $tgl_lahir, $jenis_kelamin, $alamat, $id_kategori);
+                if ($santriUpdated) {
+                    return $this->updateUser($id_user, $name, $email);
+                }            
+            case 'santri':
+                $santriUpdated = $this->updateSantri($id_user, $tgl_lahir, $jenis_kelamin, $alamat, $id_kategori);
+                if ($santriUpdated) {
+                    return $this->updateUser($id_user, $name, $email);
+                }
+                return false;
+            default:
+                return false;
+        }
+    }
+    
+
+    private function updateAsatidz($id_user, $tgl_lahir, $jenis_kelamin, $alamat, $id_kategori) {
+        $sql = "UPDATE asatidz SET 
+                    tgl_lahir = :tgl_lahir,
+                    jenis_kelamin = :jenis_kelamin,
+                    alamat = :alamat,
+                    id_kategori = :id_kategori
+                WHERE id_user = :id_user";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([
+            ':tgl_lahir' => $tgl_lahir,
+            ':jenis_kelamin' => $jenis_kelamin,
+            ':alamat' => $alamat,
+            ':id_kategori' => $id_kategori,
+            ':id_user' => $id_user
+        ]);
+    }
+
+    private function updateSantri($id_user, $tgl_lahir, $jenis_kelamin, $alamat, $id_kategori) {
+        $sql = "UPDATE santri SET 
+                    tgl_lahir = :tgl_lahir,
+                    jenis_kelamin = :jenis_kelamin,
+                    alamat = :alamat,
+                    id_kategori = :id_kategori
+                WHERE id_user = :id_user";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([
+            ':tgl_lahir' => $tgl_lahir,
+            ':jenis_kelamin' => $jenis_kelamin,
+            ':alamat' => $alamat,
+            ':id_kategori' => $id_kategori,
+            ':id_user' => $id_user
+        ]);
+    }
+
+    private function getUserRole($id_user) {
+        $sql = "SELECT role FROM users WHERE id_user = :id_user";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':id_user' => $id_user]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['role'] ?? '';
+    }
 
 }
