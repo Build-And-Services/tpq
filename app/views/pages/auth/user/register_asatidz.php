@@ -127,11 +127,7 @@
                     <option value="Perempuan">Perempuan</option>
                 </select>
                 <input type="text" name="alamat" placeholder="Alamat Lengkap" required>
-                <select name="id_asal_instansi" required>
-                    <option value="" disabled selected>Pilih Jenis Instansi</option>
-                    <option value="1">Universitas Jember</option>
-                    <option value="2">Politeknik Jember</option>
-                </select>
+                <input type="text" name="instansi" placeholder="Asal Instansi" required>
                 <input type="text" max="12" name="no_telepon" placeholder="Nomor Telepon" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
@@ -158,9 +154,9 @@
                     <textarea name="motivasi" id="motivasi" rows="4" required></textarea>
                 </div>
                 <label for="ketersedia_mengajar">Unggah Bukti Ketersediaan Mengajar:</label>
-                <input type="file" name="ketersedia_mengajar" style="margin-top: 10px;" id="ketersedia_mengajar" accept="image/*" required>
+                <input type="text" placeholder="Link Gdrive" name="ketersedia_mengajar" style="margin-top: 10px;" required>
                 <label for="syahadah_tilawati">Unggah Bukti Syahadah Tilawati:</label>
-                <input type="file" name="syahadah_tilawati" style="margin-top: 10px;" id="syahadah_tilawati" accept="image/*" required>
+                <input type="text" placeholder="Link Gdrive" name="syahadah_tilawati" style="margin-top: 10px;" required>
                 <div class="submit-section">
                     <input type="submit" value="Daftar">
                 </div>

@@ -15,7 +15,7 @@ ob_start();
 
 <section class="bg min-h-[100vh] flex flex-col items-center justify-center bg-gray-100">
   <?php if (!empty($_SESSION['error'])) : ?>
-    <div role="alert" class="mb-14">
+    <div role="alert" class="mb-14 min-w-[570px]">
       <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
         Error
       </div>
@@ -26,7 +26,7 @@ ob_start();
     <?php unset($_SESSION['error']); ?>
   <?php endif; ?>
   <?php if (!empty($_SESSION['success'])) : ?>
-    <div role="alert" class="mb-14">
+    <div role="alert" class="mb-14 min-w-[570px]">
       <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
         Success
       </div>
@@ -55,6 +55,7 @@ ob_start();
 
     <div class="mt-10">
       <form action="/login" method="post">
+        <input type="hidden" name="role" value="santri" />
         <div class="flex flex-col mb-5">
           <label for="email" class="mb-1 text-xs tracking-wide text-gray-600">Email Address:</label>
           <div class="relative">
