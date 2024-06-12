@@ -67,4 +67,32 @@ class Kelas extends Model
         }
     }
 
+    public function getKelasByUserId($id_user)
+    {
+        $sql = "
+            SELECT
+                kelas.*,
+                kategori.kategori
+            FROM
+                kelas
+            JOIN
+                kategori ON kelas.id_kategori = kategori.id_kategori
+            LEFT JOIN
+                santri ON santri.id_kategori = kategori.id_kategori
+            LEFT JOIN
+                asatidz ON asatidz.id_kategori = kategori.id_kategori
+            WHERE
+                (santri.id_user = ? OR asatidz.id_user = ?)
+            ORDER BY
+                kelas.jadwal ASC,
+                kelas.mulai ASC;
+        ";
+
+    $prepare = $this->pdo->prepare($sql);
+    $prepare->execute([$id_user, $id_user]); // Gunakan array untuk placeholder parameter
+    $result = $prepare->fetchAll(PDO::FETCH_OBJ);
+    return $result;
+}
+
+
 }

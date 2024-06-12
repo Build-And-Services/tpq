@@ -4,9 +4,10 @@ namespace app\controllers;
 
 require_once '../core/Autoloader.php';
 
-use app\models\Kategori;
-use app\models\Kelas;
 use core\Controller;
+use app\models\Kelas;
+use app\models\Santri;
+use app\models\Kategori;
 
 class KelasController extends Controller
 {
@@ -20,13 +21,23 @@ class KelasController extends Controller
 
     public function index()
     {
+        if (!isset($_SESSION['user'])) {
+            header('Location: /loginsantri');
+            exit();
+        }
+
+        $id_user = $_SESSION['user']['id'];
         $kelas = new Kelas();
+        $kelasUser = $kelas->getKelasByUserId($id_user);
         $kelas = $kelas->detailKelas();
-        $kategori = new Kategori();
-        $kategori = $kategori->all();
+
+        $kategoriModel = new Kategori();
+        $kategori = $kategoriModel->all();
+
         $this->view('pages/user/kelas', [
             'kelas' => $kelas,
             'kategori' => $kategori,
+            'kelasUser' => $kelasUser
         ]);
     }
     public function update()
