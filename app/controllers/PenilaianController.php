@@ -31,7 +31,7 @@ class PenilaianController extends Controller
     public function add()
     {
         $users = new User();
-        $users = $users->getRole();
+        $users = $users->getRole($_SESSION['user']['kategori']);
         $this->view('pages/user/penilaian/create', [
             'users' => $users
         ]);

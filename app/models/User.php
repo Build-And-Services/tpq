@@ -17,6 +17,23 @@ class User extends Model
         return $result ? $result[0] : null;
     }
 
+    public function getKategoriById($id, $role){
+        $sql = "
+        SELECT 
+            k.id_kategori, 
+            k.kategori
+        FROM
+            kategori k
+        JOIN {$role} s ON s.id_kategori = k.id_kategori
+        WHERE
+            s.id_user = {$id}";
+        $prepare = $this->pdo->prepare($sql);
+        $prepare->execute();
+        $result = $prepare->fetch(PDO::FETCH_OBJ);
+        return $result;
+
+    }
+
     public function getProfile($id_user, $role)
     {
         if ($role == 'admin') {
@@ -28,8 +45,6 @@ class User extends Model
                 u.role
             FROM 
                 users u
-           
-      
             WHERE 
                 u.id_user = :id_user
         ";
@@ -143,13 +158,17 @@ class User extends Model
         return $result;
     }
 
-    public function getRole()
+    public function getRole($kategori)
     {
         $sql = "
             SELECT *
-            FROM {$this->table}
+            FROM {$this->table} k
+            JOIN santri s ON s.id_user = k.id_user
             WHERE role = 'santri'
+            AND
+            s.id_kategori = {$kategori}
         ";
+        // var_dump($sql);
         $prepare = $this->pdo->prepare($sql);
         $prepare->execute();
         $result = $prepare->fetchAll(PDO::FETCH_OBJ);
