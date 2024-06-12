@@ -154,11 +154,15 @@ class AuthController extends Controller
             } else {
                 $hashedPassword = $user->password;
                 if (password_verify($password, $hashedPassword)) {
+                    $userK = new User();
+                    // var_dump($user, $role);
+                    $kategori = $userK->getKategoriById($user->id_user, $role);
                     $_SESSION['user'] = [
                         'id' => $user->id_user,
                         'name' => $user->name,
                         'email' => $user->email,
                         'role' => $user->role,
+                        'kategori' => $kategori->id_kategori,
                     ];
                     header('Location: /page');
                     exit();

@@ -11,13 +11,13 @@ use core\Controller;
 
 class KehadiranController extends Controller
 {
-    // public function __construct()
-    // {
-    //     if (!$this->isAuthenticated()) {
-    //         header('Location: /');
-    //         exit();
-    //     }
-    // }
+    public function __construct()
+    {
+        if (!$this->isAuthenticated()) {
+            header('Location: /');
+            exit();
+        }
+    }
     public function index()
     {
         $kehadiran = new Kehadiran();
@@ -30,7 +30,7 @@ class KehadiranController extends Controller
     public function add()
     {
         $users = new User();
-        $users = $users->getRole();
+        $users = $users->getRole($_SESSION['user']['kategori']);
         $this->view('pages/user/kehadiran/create', [
             'users' => $users
         ]);
