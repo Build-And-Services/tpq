@@ -67,7 +67,6 @@ class KegiatanController extends Controller
             $kegiatan->create([
                 'nama_kegiatan' => $request['nama_kegiatan'],
                 'foto' => $filepath,
-                'deskripsi' => $request['deskripsi'],
                 'tanggal' => $request['tanggal']
             ]);
 
@@ -132,7 +131,6 @@ class KegiatanController extends Controller
             $kegiatan->update([
                 'nama_kegiatan' => $request['nama_kegiatan'],
                 'foto' => $filePath,
-                'deskripsi' => $request['deskripsi'],
                 'tanggal' => $request['tanggal']
             ], $kegiatanId);
 
