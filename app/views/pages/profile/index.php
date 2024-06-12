@@ -55,7 +55,8 @@ ob_start();
             </p>
         </div>
 
-        <div class="mt-5">
+        <div class="mt-5 flex gap-2">
+            <a href="/profile/edit" class="bg-green-500 px-8 py-2 rounded-md text-white font-semibold block w-fit">Ubah Profil</a>
             <a href="/logout" class="bg-red-500 px-8 py-2 rounded-md text-white font-semibold block w-fit">Logout</a>
         </div>
     </div>

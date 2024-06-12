@@ -29,6 +29,8 @@ Router::get('/penilaian', 'PenilaianController', 'index');
 Router::get('/penilaian/create', 'PenilaianController', 'add');
 Router::post('/penilaian/store', 'PenilaianController', 'store');
 Router::get('/profile', 'ProfilAsatidzController', 'index');
+Router::get('/profile/edit', 'ProfilAsatidzController', 'edit');
+Router::post('/profile/update/{id}', 'ProfilAsatidzController', 'updateUser');
 
 Router::get('/kelas', 'KelasController', 'index');
 Router::get('/kelas/delete/{id}', 'KelasController', 'destroy');
