@@ -13,6 +13,10 @@ ob_start();
                         <th class="py-2 text-left px-4">Nama Lengkap</th>
                         <th class="py-2 text-left px-4">Jenis Kelamin</th>
                         <th class="py-2 text-left px-4">Tanggal Lahir</th>
+                        <th class="py-2 text-left px-4">Alamat</th>
+                        <th class="py-2 text-left px-4">Instansi</th>
+                        <th class="py-2 text-left px-4">No Telepon</th>
+                        <th class="py-2 text-left px-4">Kategori</th>
                         <th class="py-2 text-left px-4">Bukti Pembayaran</th>
                         <th class="py-2 text-left px-4">Aksi</th>
 
@@ -24,7 +28,14 @@ ob_start();
                             <td class="py-2 text-left px-4"><?php echo $san->name; ?></td>
                             <td class="py-2 text-left px-4"><?php echo $san->jenis_kelamin; ?></td>
                             <td class="py-2 text-left px-4"><?php echo $san->tgl_lahir; ?></td>
-                            <td class="py-2 text-left px-4 truncate max-w-[10px]"><?php echo $san->bukti_pembayaran; ?></td>
+                            <td class="py-2 text-left px-4"><?php echo $san->alamat; ?></td>
+                            <td class="py-2 text-left px-4"><?php echo $san->instansi; ?></td>
+                            <td class="py-2 text-left px-4"><?php echo $san->no_telepon; ?></td>
+                            <td class="py-2 text-left px-4"><?php echo $san->kategori; ?></td>
+                            <td class="py-2 text-left px-4 truncate max-w-[10px]">
+                                <a target="_blank"
+                                    href="<?php echo $san->bukti_pembayaran; ?>"><?php echo $san->bukti_pembayaran; ?></a>
+                            </td>
 
                             <td class="py-2 text-left px-4 flex gap-2">
                                 <form action="datatpq/update/<?php echo $san->id_user ?>" method="post">
@@ -56,6 +67,10 @@ ob_start();
                         <th class="py-2 text-left px-4">Nama Lengkap</th>
                         <th class="py-2 text-left px-4">Jenis Kelamin</th>
                         <th class="py-2 text-left px-4">Tanggal Lahir</th>
+                        <th class="py-2 text-left px-4">Alamat</th>
+                        <th class="py-2 text-left px-4">Instansi</th>
+                        <th class="py-2 text-left px-4">No Telepon</th>
+                        <th class="py-2 text-left px-4">Kategori</th>
                         <th class="py-2 text-left px-4">Bukti Pembayaran</th>
                         <th class="py-2 text-left px-4">Aksi</th>
 
@@ -67,8 +82,13 @@ ob_start();
                             <td class="py-2 text-left px-4"><?php echo $asat->name; ?></td>
                             <td class="py-2 text-left px-4"><?php echo $asat->jenis_kelamin; ?></td>
                             <td class="py-2 text-left px-4"><?php echo $asat->tgl_lahir; ?></td>
+                            <td class="py-2 text-left px-4"><?php echo $asat->alamat; ?></td>
+                            <td class="py-2 text-left px-4"><?php echo $asat->instansi; ?></td>
+                            <td class="py-2 text-left px-4"><?php echo $asat->no_telepon; ?></td>
+                            <td class="py-2 text-left px-4"><?php echo $asat->kategori; ?></td>
                             <td class="py-2 text-left px-4 truncate max-w-[10px]">
-                                <?php echo $asat->bukti_ketersedian_mengajar; ?>
+                                <a target="_blank"
+                                    href="<?php echo $asat->bukti_ketersedian_mengajar; ?>"><?php echo $asat->bukti_ketersedian_mengajar; ?></a>
                             </td>
 
                             <td class="py-2 text-left px-4 flex gap-2">

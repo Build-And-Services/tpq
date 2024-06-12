@@ -18,11 +18,10 @@ ob_start();
                         class="aspect-video object-cover rounded-md">
                     <small class="py-2 block"><?php echo $item->tanggal; ?></small>
                     <h3 class="font-bold"><?php echo $item->nama_kegiatan; ?></h3>
-                    <p><?php echo $item->deskripsi ?></p>
                     <?php if ($_SESSION['user']['role'] === 'admin'): ?>
                         <div class="mt-2 flex gap-2">
                             <button data-id="<?php echo $item->id; ?>" data-nama="<?php echo $item->nama_kegiatan; ?>"
-                                data-deskripsi="<?php echo $item->deskripsi; ?>" data-tanggal="<?php echo $item->tanggal; ?>"
+                                data-tanggal="<?php echo $item->tanggal; ?>"
                                 class="px-1 bg-gray-100 border-gray-400 border edit-kegiatan">Edit</button>
                             <a href="/kegiatan/delete/<?= $item->id; ?>" class="px-1 bg-gray-100 border-gray-400 border"
                                 onclick="return confirm('Apakah kamu yakin akan menghapus data tersebut?')">Hapus</a>
@@ -50,11 +49,6 @@ ob_start();
                 <label for="foto" class="block text-sm font-medium text-gray-700">Foto Kegiatan</label>
                 <input type="file" name="foto" id="foto"
                     class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-green-200">
-            </div>
-            <div class="mb-4">
-                <label for="deskripsi" class="block text-sm font-medium text-gray-700">Deskripsi</label>
-                <textarea name="deskripsi" id="deskripsi" rows="3"
-                    class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-green-200"></textarea>
             </div>
             <div class="mb-4">
                 <label for="tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
@@ -89,20 +83,18 @@ ob_start();
         }
 
         document.getElementById("openKegiatanModal").addEventListener("click", function () {
-            openModal("Tambah Kegiatan Baru", "/kegiatan/store"); // Set action for store
+            openModal("Tambah Kegiatan Baru", "/kegiatan/store");
         });
 
         document.querySelectorAll(".edit-kegiatan").forEach(function (button) {
             button.addEventListener("click", function () {
                 var nama = this.getAttribute("data-nama");
-                var deskripsi = this.getAttribute("data-deskripsi");
                 var tanggal = this.getAttribute("data-tanggal");
                 var id = this.getAttribute("data-id");
                 document.getElementById("nama_kegiatan").value = nama;
-                document.getElementById("deskripsi").value = deskripsi;
                 document.getElementById("tanggal").value = tanggal;
-                document.getElementById("kegiatan_id").value = id; // Set the kegiatan id for edit mode
-                openModal("Edit Kegiatan", "/kegiatan/update/" + id); // Set action for edit
+                document.getElementById("kegiatan_id").value = id;
+                openModal("Edit Kegiatan", "/kegiatan/update/" + id);
             });
         });
 

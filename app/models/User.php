@@ -89,11 +89,17 @@ class User extends Model
                     u.status,
                     a.tgl_lahir,
                     a.jenis_kelamin,
-                    a.bukti_pembayaran
+                    a.bukti_pembayaran,
+                    a.alamat,
+                    a.instansi,
+                    a.no_telepon,
+                    k.kategori
                 FROM 
                     users u
                 JOIN 
                     " . $role . " a ON u.id_user = a.id_user
+                JOIN 
+                    kategori k ON a.id_kategori = k.id_kategori
                 WHERE 
                     u.role = '" . $role . "'
             ";
@@ -106,11 +112,17 @@ class User extends Model
                     u.status,
                     a.tgl_lahir,
                     a.jenis_kelamin,
-                    a.bukti_ketersedian_mengajar
+                    a.bukti_ketersedian_mengajar,
+                    a.alamat,
+                    a.instansi,
+                    a.no_telepon,
+                    k.kategori
                 FROM 
                     users u
                 JOIN 
                     " . $role . " a ON u.id_user = a.id_user
+                JOIN 
+                    kategori k ON a.id_kategori = k.id_kategori
                 WHERE 
                     u.role = '" . $role . "'
             ";
