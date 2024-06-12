@@ -12,6 +12,28 @@ ob_start();
 </style>
 
 <section class="bg min-h-[100vh] flex flex-col items-center justify-center bg-gray-100">
+    <?php if (!empty($_SESSION['error'])) : ?>
+        <div role="alert" class="mb-14 min-w-[570px]">
+            <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+                Error
+            </div>
+            <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                <p><?php echo $_SESSION['error']; ?></p>
+            </div>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+    <?php if (!empty($_SESSION['success'])) : ?>
+        <div role="alert" class="mb-14 min-w-[570px]">
+            <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
+                Success
+            </div>
+            <div class="border border-t-0 border-green-400 rounded-b bg-green-100 px-4 py-3 text-green-700">
+                <p><?php echo $_SESSION['success']; ?></p>
+            </div>
+        </div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
     <div class="
           flex flex-col
           bg-white
@@ -31,6 +53,7 @@ ob_start();
 
         <div class="mt-10">
             <form action="/login" method="post">
+                <input type="hidden" name="role" value="admin" />
                 <div class="flex flex-col mb-5">
                     <label for="email" class="mb-1 text-xs tracking-wide text-gray-600">Email Address:</label>
                     <div class="relative">

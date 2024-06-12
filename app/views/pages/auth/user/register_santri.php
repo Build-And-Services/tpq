@@ -116,11 +116,7 @@
                     <option value="Perempuan">Perempuan</option>
                 </select>
                 <input type="text" name="alamat" placeholder="Alamat Lengkap" required>
-                <select name="instansi" required>
-                    <option value="" disabled selected>Pilih Jenis Instansi</option>
-                    <option value="Universitas Jember">Universitas Jember</option>
-                    <option value="Politeknik Jember">Politeknik Jember</option>
-                </select>
+                <input type="text" name="instansi" placeholder="Asal Instansi" required>
         </div>
         <div class="kategori">
             <p>Pilih kategori:</p>
@@ -129,7 +125,7 @@
             <input type="radio" name="kategori" value="3"> Dewasa<br>
             <div style="margin-top: 10px;">
                 <label for="bukti_pembayaran">Unggah Bukti Pembayaran:</label>
-                <input style="margin-top: 10px;" type="file" name="bukti_pembayaran" id="bukti_pembayaran" accept="image/*" required>
+                <input style="margin-top: 10px;" type="text" name="bukti_pembayaran" placeholder="Link Gdrive" required>
 
             </div>
         </div>

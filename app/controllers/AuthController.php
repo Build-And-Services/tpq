@@ -59,8 +59,10 @@ class AuthController extends Controller
         $this->view('pages/auth/user/register_asatidz');
     }
 
-    public function registerAsatidz(){
+    public function registerAsatidz()
+    {
         try {
+            var_dump($this->request->all());
             $user = new User();
             $hashed_password = password_hash($this->request->password, PASSWORD_BCRYPT);
             $id_user = $user->insertGetId([
@@ -71,44 +73,25 @@ class AuthController extends Controller
                 'status' => 'WAITING'
             ]);
 
-            if ($_FILES['ketersedia_mengajar']) {
-                $targetDir = $_SERVER['DOCUMENT_ROOT'] . "/images/ketersedia_mengajar/"; // Direktori tujuan penyimpanan
-                $targetFile = $targetDir . basename($_FILES["ketersedia_mengajar"]["name"]);
-                $upload = move_uploaded_file($_FILES["ketersedia_mengajar"]["tmp_name"], $targetFile);
-                if ($upload) {
-                    $_POST["ketersedia_mengajar"]  = "/images/ketersedia_mengajar/" . basename($_FILES["ketersedia_mengajar"]["name"]);
-                }
-            }
-
-            if ($_FILES['syahadah_tilawati']) {
-                $targetDir = $_SERVER['DOCUMENT_ROOT'] . "/images/syahadah_tilawati/"; // Direktori tujuan penyimpanan
-                $targetFile = $targetDir . basename($_FILES["syahadah_tilawati"]["name"]);
-                $upload = move_uploaded_file($_FILES["syahadah_tilawati"]["tmp_name"], $targetFile);
-                if ($upload) {
-                    $_POST["syahadah_tilawati"]  = "/images/syahadah_tilawati/" . basename($_FILES["syahadah_tilawati"]["name"]);
-                }
-            }
-
             $asatidz = new Asatidz();
+
             $asatidz->create([
                 'id_user' => $id_user,
                 'tgl_lahir' => $this->request->tgl_lahir,
                 'jenis_kelamin' => $this->request->jenis_kelamin,
                 'alamat' => $this->request->alamat,
                 'id_kabupaten' => 1,
-                'id_asal_instansi' => $this->request->id_asal_instansi,
+                'instansi' => $this->request->instansi,
                 'id_kategori' => $this->request->id_kategori,
                 'no_telepon' => $this->request->no_telepon,
-                'bukti_ketersedian_mengajar' => $_POST["ketersedia_mengajar"],
-                'bukti_syahadah' => $_POST["syahadah_tilawati"],
+                'bukti_ketersedian_mengajar' => $this->request->ketersedia_mengajar,
+                'bukti_syahadah' => $this->request->syahadah_tilawati,
+                'motivasi_mengajar' => $this->request->motivasi,
             ]);
             header('Location: /loginasatidz');
         } catch (\Throwable $th) {
             header('Location: /register-asatidz');
-        
         }
-      
-
     }
 
     public function registerSantri()
@@ -123,14 +106,7 @@ class AuthController extends Controller
             $alamat = $_POST['alamat'];
             $instansi = $_POST['instansi'];
             $kategori = $_POST['kategori'];
-            if ($_FILES['bukti_pembayaran']) {
-                $targetDir = $_SERVER['DOCUMENT_ROOT'] . "/images/bukti_pembayaran/"; // Direktori tujuan penyimpanan
-                $targetFile = $targetDir . basename($_FILES["bukti_pembayaran"]["name"]);
-                $upload = move_uploaded_file($_FILES["bukti_pembayaran"]["tmp_name"], $targetFile);
-                if ($upload) {
-                    $_POST["bukti_pembayaran"]  = "/images/bukti_pembayaran/" . basename($_FILES["bukti_pembayaran"]["name"]);
-                }
-            }
+            $bukti_pembayaran = $_POST['bukti_pembayaran'];
 
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
@@ -143,23 +119,16 @@ class AuthController extends Controller
                 'status' => 'WAITING'
             ]);
 
-            $id_instansi = 0;
-
             $santri = new Santri();
-            if ($instansi == 'Politeknik Jember') {
-                $id_instansi = 1;
-            } else {
-                $id_instansi = 2;
-            }
             $santri->create([
                 'id_user' => $id_user,
                 'tgl_lahir' => $tanggal_lahir,
                 'jenis_kelamin' => $jenis_kelamin,
                 'alamat' => $alamat,
-                'id_asal_instansi' => $id_instansi,
+                'instansi' => $instansi,
                 'id_kategori' => $kategori,
                 'no_telepon' => $telepon,
-                'bukti_pembayaran' => $_POST["bukti_pembayaran"]
+                'bukti_pembayaran' => $bukti_pembayaran
 
             ]);
             $_SESSION['success'] = 'Register Berhasil, silahkan menunggu Whatsapp dari admin untuk persetujuan akun.';
@@ -172,6 +141,7 @@ class AuthController extends Controller
 
     public function login()
     {
+        $role = $_POST['role'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $user = new User();
@@ -180,6 +150,7 @@ class AuthController extends Controller
         if ($user) {
             if ($user->status == 'WAITING') {
                 $_SESSION['error'] = "Akun anda belum di setujui oleh admin belum bisa login";
+                $this->redirectToLoginPageWhenFail($role);
             } else {
                 $hashedPassword = $user->password;
                 if (password_verify($password, $hashedPassword)) {
@@ -192,18 +163,37 @@ class AuthController extends Controller
                     header('Location: /page');
                     exit();
                 } else {
-                    $errorMessage = "Password incorrect.";
+                    $_SESSION['error'] = "Password incorrect.";
+                    $this->redirectToLoginPageWhenFail($role);
                 }
             }
         } else {
-            $errorMessage = "Email not found.";
+            $_SESSION['error'] = "Email not found.";
+            $this->redirectToLoginPageWhenFail($role);
         }
 
-        header('Location: /loginsantri');
+        $this->redirectToLoginPageWhenFail($role);
         exit();
     }
 
-    public function logout(){
+    private function redirectToLoginPageWhenFail($role)
+    {
+        switch ($role) {
+            case 'admin':
+                header('Location: /login-admin');
+                break;
+            case 'asatidz':
+                header('Location: /loginasatidz');
+                break;
+            case 'santri':
+                header('Location: /loginsantri');
+            default:
+                header('Location: /loginsantri');
+                break;
+        }
+    }
+    public function logout()
+    {
         session_destroy();
         header('Location: /');
     }
